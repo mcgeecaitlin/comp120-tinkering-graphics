@@ -47,7 +47,6 @@ def main():
     It contains a loop which updates the program every frame.
     """
     main_window.fill(WHITE)
-    main_window.blit(original_image, ORIGIN)
 
     # Saving the make_less_red image under a new name
     effect = make_less_red(original_image, RED_REDUCTION_AMOUNT)
