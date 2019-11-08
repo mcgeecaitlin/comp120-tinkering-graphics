@@ -5,6 +5,13 @@ __copyright__ = "MIT License Copyright (c) 2019"
 __license__ = "MIT"
 __url__ = "https://github.com/mcgeecaitlin/comp120-tinkering-graphics"
 
+"""
+This program is designed to remove colour from an image, relevant to a type of colour blindness.
+After the image has been processed it is saved under a new name.
+
+The image fireworks.png is an image I own the rights to.
+"""
+
 # Variables for pop up window
 WINDOW_WIDTH = 480
 WINDOW_HEIGHT = 640
@@ -36,7 +43,8 @@ original_image = pygame.image.load(BASE_IMAGE + BASE_IMAGE_EXTENSION).convert()
 
 def main():
     """
-    Main function
+    This function saves three new images for the three types of colour blindness.
+    It contains a loop which updates the program every frame.
     """
     main_window.fill(WHITE)
     main_window.blit(original_image, ORIGIN)
@@ -50,7 +58,7 @@ def main():
     pygame.image.save(original_image, BASE_IMAGE + EFFECT[effect] + BASE_IMAGE_EXTENSION)
 
     # Saving the greyscale image under a new name
-    effect = make_greyscale(original_image, REDUCTION_AMOUNT)
+    effect = make_greyscale(original_image)
     pygame.image.save(original_image, BASE_IMAGE + EFFECT[effect] + BASE_IMAGE_EXTENSION)
 
     main_window.blit(original_image, ORIGIN)
@@ -106,7 +114,7 @@ def make_less_blue(surface, blue_reduction_amount):
     return LESS_BLUE
 
 
-def make_greyscale(surface, reduction_amount):
+def make_greyscale(surface):
     """
     This function is to replicate an image of colour blindness monochromacy.
     Function to loop through the image pixels to remove colour.
@@ -115,9 +123,9 @@ def make_greyscale(surface, reduction_amount):
     for x in range(0, surface.get_width()):
         for y in range(0, surface.get_height()):
             pixel_colour = surface.get_at((x, y))
-            new_red = pixel_colour.r - reduction_amount
-            new_green = pixel_colour.g - reduction_amount
-            new_blue = pixel_colour.b - reduction_amount
+            new_red = pixel_colour.r
+            new_green = pixel_colour.g
+            new_blue = pixel_colour.b
 
             if new_red < 0:
                 new_red = 0
@@ -128,7 +136,9 @@ def make_greyscale(surface, reduction_amount):
             if new_blue < 0:
                 new_blue = 0
 
-            pixel_colour = (new_red, new_green, new_blue)
+            greyscale_pixel_value = (new_red + new_green + new_blue)/3
+
+            pixel_colour = (greyscale_pixel_value, greyscale_pixel_value, greyscale_pixel_value)
             surface.set_at((x, y), pixel_colour)
 
     return GREYSCALE
