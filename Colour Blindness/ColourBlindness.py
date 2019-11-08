@@ -1,5 +1,9 @@
 import pygame
 
+__author__ = "Caitlin McGee"
+__copyright__ = "MIT License Copyright (c) 2019"
+__license__ = "MIT"
+__url__ = "https://github.com/mcgeecaitlin/comp120-tinkering-graphics"
 
 # Variables for pop up window
 WINDOW_WIDTH = 480
